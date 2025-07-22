@@ -3,40 +3,31 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ToDoList</title>
+    <title>ValContact</title>
     <link rel="stylesheet" href="lib/jquery.mobile-1.4.5.min.css" />
     <link rel="stylesheet" href="css/index.css" />
-    <!-- <script src="lib/jquery.min.js"></script> -->
-       <link rel="stylesheet" href="css/themes/black.css" />
-       <link rel="stylesheet" href="css/themes/black.min.css" />
-      <link rel="stylesheet" href="css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="css/themes/black.css" />
+    <link rel="stylesheet" href="css/themes/black.min.css" />
+    <link rel="stylesheet" href="css/themes/jquery.mobile.icons.min.css" />
     <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="lib/jquery.mobile-1.4.5.min.js"></script>
-    <!-- <script src="cordova.js"></script> -->
-    <script src="js/index.js" defer></script>
+    <script src="cordova.js"></script>
+    <script src="js/index.js"></script>
   </head>
   <body>
     <div id="homePage" data-role="page">
       <div data-role="header" data-theme="a">
         <h1>ValContact</h1>
+        <a href="#" data-role="button" data-icon="refresh" data-iconpos="notext" onclick="loadContacts()">Actualiser</a>
       </div>
       <div role="main" class="ui-content">
+        <div class="search-bar">
+          <input type="search" id="searchInput" placeholder="Rechercher un contact..." onkeyup="searchContacts()">
+        </div>
+        
         <a href="#addContact" data-role="button" data-icon="plus">Ajouter contact</a>
+        
         <ul id="contactList" data-role="listview" data-inset="true">
-          <li>
-            <a href="#detailContactPage" data-icon="carat-r" data-role="button" data-iconpos="right">
-              <img src="img/contact.png" alt="" srcset="">
-              <h2>Black Valeska</h2>
-              <p>771971061</p>
-            </a>
-          </li>
-          <li>
-            <a href="#detailContactPage" data-icon="carat-r" data-role="button" data-iconpos="right">
-              <img src="img/contact.png" alt="" srcset="">
-              <h2>Mohamed MBAYE</h2>
-              <p>766870787</p>
-            </a>
-          </li>
         </ul>
       </div>
       <div data-role="footer" data-position="fixed">
@@ -45,30 +36,18 @@
     </div>
 
     <div id="detailContactPage" data-role="page">
-      <div data-role="header">
-        <h1>ValContact</h1>
+      <div data-role="header" data-theme="b">
         <a href="#homePage" data-role="button" data-icon="carat-l" data-rel="back" data-iconpos="notext">Retour</a>
+        <h1>ValContact</h1>
+        <a href="#editContact" data-role="button" data-icon="edit" data-iconpos="notext" onclick="prepareEditContact()">Modifier</a>
       </div>
       <div role="main" class="ui-content">
         <div data-role="header">
-          <a href="#" data-role="button" data-icon="edit" data-iconpos="notext">Modifier</a>
+          <a href="#" data-role="button" data-icon="delete" data-iconpos="notext" onclick="confirmDeleteContact()" class="ui-btn-right">Supprimer</a>
           <h1>Details</h1>
-          <a href="#" data-role="button" data-icon="delete" data-iconpos="notext">Supprimer</a>
         </div>
-        <ul data-role="listview" data-inset="true">
-          <li>
-            <img src="img/contact.png" alt="">
-            <h1>Black Valeska</h1>
-          </li>
-          <li>
-            <h2>Telephone</h2>
-            <p>77 197 10 61</p>
-          </li>
-          <li>
-            <h2>Email</h2>
-            <p>mhxii105@gmail.com</p>
-          </li>
-        </ul>
+        <div id="contactDetails">
+        </div>
       </div>
       <div data-role="footer" data-position="fixed">
         <h1>VALESKA &copy; 2025</h1>
@@ -76,9 +55,65 @@
     </div>
 
     <div id="addContact" data-role="page">
-      
+      <div data-role="header" data-theme="c">
+        <a href="#homePage" data-role="button" data-icon="carat-l" data-rel="back" data-iconpos="notext">Retour</a>
+        <h1>Ajouter Contact</h1>
+        <a href="#" data-role="button" data-icon="check" data-iconpos="notext" onclick="saveNewContact()">Sauvegarder</a>
+      </div>
+      <div role="main" class="ui-content">
+        <form id="addContactForm">
+          <div data-role="fieldcontain">
+            <label for="addName">Nom complet:</label>
+            <input type="text" id="addName" placeholder="Nom complet" required>
+          </div>
+          <div data-role="fieldcontain">
+            <label for="addPhone">Telephone:</label>
+            <input type="tel" id="addPhone" placeholder="Numero de telephone" required>
+          </div>
+          <div data-role="fieldcontain">
+            <label for="addEmail">Email:</label>
+            <input type="email" id="addEmail" placeholder="Adresse email">
+          </div>
+          <div data-role="fieldcontain">
+            <label for="addOrganization">Organisation:</label>
+            <input type="text" id="addOrganization" placeholder="Entreprise/Organisation">
+          </div>
+        </form>
+      </div>
+      <div data-role="footer" data-position="fixed">
+        <h1>VALESKA &copy; 2025</h1>
+      </div>
     </div>
 
-   </div>
+    <div id="editContact" data-role="page">
+      <div data-role="header">
+        <a href="#detailContactPage" data-role="button" data-icon="carat-l" data-rel="back" data-iconpos="notext">Retour</a>
+        <h1>Modifier Contact</h1>
+        <a href="#" data-role="button" data-icon="check" data-iconpos="notext" onclick="saveEditedContact()">Sauvegarder</a>
+      </div>
+      <div role="main" class="ui-content">
+        <form id="editContactForm">
+          <div data-role="fieldcontain">
+            <label for="editName">Nom complet:</label>
+            <input type="text" id="editName" placeholder="Nom complet" required>
+          </div>
+          <div data-role="fieldcontain">
+            <label for="editPhone">Telephone:</label>
+            <input type="tel" id="editPhone" placeholder="Numero de telephone" required>
+          </div>
+          <div data-role="fieldcontain">
+            <label for="editEmail">Email:</label>
+            <input type="email" id="editEmail" placeholder="Adresse email">
+          </div>
+          <div data-role="fieldcontain">
+            <label for="editOrganization">Organisation:</label>
+            <input type="text" id="editOrganization" placeholder="Entreprise/Organisation">
+          </div>
+        </form>
+      </div>
+      <div data-role="footer" data-position="fixed">
+        <h1>VALESKA &copy; 2025</h1>
+      </div>
+    </div>
   </body>
 </html>

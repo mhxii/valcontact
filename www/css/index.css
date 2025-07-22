@@ -108,3 +108,23 @@ h1 {
         background-image:linear-gradient(to bottom, #585858 0%, #1B1B1B 51%);
     }
 }
+
+      .contact-image {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+      }
+      .search-bar {
+        margin: 10px 0;
+      }
+      .contact-details {
+        text-align: center;
+        padding: 20px;
+      }
+      .contact-details img {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        margin: 0 auto 20px;
+        display: block;
+      }

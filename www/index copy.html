@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ToDoList</title>
+    <link rel="stylesheet" href="lib/jquery.mobile-1.4.5.min.css" />
+    <link rel="stylesheet" href="css/index.css" />
+    <!-- <script src="lib/jquery.min.js"></script> -->
+       <link rel="stylesheet" href="css/themes/black.css" />
+       <link rel="stylesheet" href="css/themes/black.min.css" />
+      <link rel="stylesheet" href="css/themes/jquery.mobile.icons.min.css" />
+    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="lib/jquery.mobile-1.4.5.min.js"></script>
+    <script src="cordova.js"></script>
+    <script src="js/index.js"></script>
+  </head>
+  <body>
+    <div id="homePage" data-role="page">
+      <div data-role="header" data-theme="a">
+        <h1>ValContact</h1>
+      </div>
+      <div role="main" class="ui-content">
+        <a href="#addContact" data-role="button" data-icon="plus">Ajouter contact</a>
+        <ul id="contactList" data-role="listview" data-inset="true">
+          <li>
+            <a href="#detailContactPage" data-icon="carat-r" data-role="button" data-iconpos="right">
+              <img src="img/contact.png" alt="" srcset="">
+              <h2>Black Valeska</h2>
+              <p>771971061</p>
+            </a>
+          </li>
+          <li>
+            <a href="#detailContactPage" data-icon="carat-r" data-role="button" data-iconpos="right">
+              <img src="img/contact.png" alt="" srcset="">
+              <h2>Mohamed MBAYE</h2>
+              <p>766870787</p>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div data-role="footer" data-position="fixed">
+        <h1>VALESKA &copy; 2025</h1>
+      </div>
+    </div>
+
+    <div id="detailContactPage" data-role="page">
+      <div data-role="header">
+        <h1>ValContact</h1>
+        <a href="#homePage" data-role="button" data-icon="carat-l" data-rel="back" data-iconpos="notext">Retour</a>
+      </div>
+      <div role="main" class="ui-content">
+        <div data-role="header">
+          <a href="#" data-role="button" data-icon="edit" data-iconpos="notext">Modifier</a>
+          <h1>Details</h1>
+          <a href="#" data-role="button" data-icon="delete" data-iconpos="notext">Supprimer</a>
+        </div>
+        <ul data-role="listview" data-inset="true">
+          <li>
+            <img src="img/contact.png" alt="">
+            <h1>Black Valeska</h1>
+          </li>
+          <li>
+            <h2>Telephone</h2>
+            <p>77 197 10 61</p>
+          </li>
+          <li>
+            <h2>Email</h2>
+            <p>mhxii105@gmail.com</p>
+          </li>
+        </ul>
+      </div>
+      <div data-role="footer" data-position="fixed">
+        <h1>VALESKA &copy; 2025</h1>
+      </div>
+    </div>
+
+    <div id="addContact" data-role="page">
+      
+    </div>
+
+   </div>
+  </body>
+</html>
